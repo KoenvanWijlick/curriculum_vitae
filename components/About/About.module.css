@@ -1,70 +1,66 @@
-
-/* Section wrapper */
 .wrapper {
-    background: transparent;
-    padding: clamp(4rem, 8vw, 7rem) 1rem;
-    display: flex;
-    justify-content: center;
-    color: var(--light-text);
+  max-width: var(--page-width);
+  margin: auto;
+  padding: var(--section-padding) 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.heading {
+  margin-bottom: 2rem;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.imageColumn {
+  order: 2;
+}
+
+.photoWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.photoWrap img {
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.paragraph {
+  margin: 0 0 1rem;
+  color: var(--muted-text);
+  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.journey {
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-underline-offset: 4px;
+}
+
+@media (width <= 768px) {
+  .wrapper {
+    padding-inline: 1.25rem;
   }
-  
+
   .inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  
-  .photoWrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    border-radius: var(--card-radius);
-    box-shadow: 0 12px 42px rgb(0 0 0 / 0.45);
+
+  .imageColumn {
+    max-width: 260px;
   }
-  
-  .photoWrap img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  .content {
-    background: var(--card-bg);
-    border-radius: var(--card-radius);
-    padding: clamp(2rem, 5vw, 3rem);
-    box-shadow: 0 12px 42px rgb(0 0 0 / 0.45);
-    backdrop-filter: blur(8px);
-  }
-  
-  .heading {
-    font-family: "Bebas Neue", "Oswald", sans-serif;
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
-    letter-spacing: 0.04em;
-    margin: 0 0 1rem;
-    color: var(--accent);
-  }
-  
-  .paragraph {
-    font-size: clamp(1rem, 1.15vw + 0.9rem, 1.1rem);
-    line-height: 1.65;
-    margin: 0;
-    text-align: justify;
-  }
-  
-  /* Mobile stacking */
-  @media (max-width: 768px) {
-    .inner {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    .photoWrap {
-      aspect-ratio: 4 / 3;
-    }
-  }
+}

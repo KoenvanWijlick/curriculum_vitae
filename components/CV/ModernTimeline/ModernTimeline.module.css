@@ -1,165 +1,190 @@
 .wrapper {
-  position: relative;
-  padding: clamp(4rem, 8vw, 6rem) 1rem;
-  background: transparent;
-  color: var(--text-color);
-  overflow: hidden;
+  max-width: var(--page-width);
+  margin: auto;
+  padding: var(--section-padding) 2rem;
 }
 
-/*──── decorative split‑screen vertical stroke seen in reference */
-.wrapper::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: var(--accent);
-  opacity: 0.9;
-  z-index: 0;
-  pointer-events: none;
+.lead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  margin-bottom: 5rem;
+  align-items: start;
 }
 
-/* fixed blurred topo / texture bg (optional) */
-.bg {
-  position: fixed;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(10px) saturate(0.4);
-  z-index: -2;
+.lead h2 {
+  max-width: 20ch;
 }
 
-.inner {
-  max-width: 1080px;
-  margin-inline: auto;
-  position: relative;
+.index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  max-width: 420px;
+  padding-top: 0.5rem;
 }
 
-/*──── shared bullet */
-.entry::before {
-  content: "";
-  position: absolute;
-  top: 1.1rem;
-  width: 14px;
-  height: 14px;
+.index a {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 32px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted-text);
+}
+
+.index a:hover {
+  color: var(--accent);
+}
+
+.download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: start;
+  min-height: 44px;
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 3rem;
+  padding-top: 2rem;
+  margin-bottom: 4rem;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 100px;
+}
+
+.groupHeading h2 {
+  position: sticky;
+  top: 110px;
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.entries {
+  min-width: 0;
+}
+
+.entry {
+  padding: 0 0 2.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.currentBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.currentBadge > span {
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgb(224 108 52 / 15%);
-  z-index: 2;
-  pointer-events: none;
 }
 
-/*──── left/right alignment */
-.entry {
+.entryHeading {
   display: flex;
-  position: relative;
-  margin-block: 2.5rem;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.left {
-  flex-direction: row-reverse;
+.entryHeading h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
-.left::before {
-  right: -7px;
-}
-
-.right::before {
-  left: -7px;
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: var(--card-radius);
-  padding: 1.5rem 1.75rem;
-  width: clamp(280px, 45%, 440px);
-  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
-  backdrop-filter: blur(6px);
-}
-
-.title {
-  font-family: "Bebas Neue", "Oswald", sans-serif;
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-  margin: 0 0 0.25rem;
-  letter-spacing: 0.02em;
-  color: var(--text-color);
-}
-
-.subtitle {
-  font-size: 0.95rem;
+.date {
+  margin: 0;
   color: var(--muted-text);
-  margin-bottom: 0.4rem;
-}
-
-.description {
-  line-height: 1.55;
-  font-size: 1rem;
-  color: var(--muted-text-light);
+  font-size: 0.8rem;
+  line-height: 1.6;
 }
 
 .role {
-  font-weight: 700;
-  margin-bottom: 0.3rem;
+  margin: 1rem 0 0;
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/*──── category headings */
-.category {
-  text-align: center;
-  margin-block: 4rem 1.5rem;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-family: "Bebas Neue", "Oswald", sans-serif;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.description {
+  max-width: 65ch;
+  margin: 1rem 0 0;
+  color: var(--muted-text);
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.website {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  margin-top: 1rem;
   color: var(--accent);
-  position: relative;
+  font-size: 0.8rem;
+  text-decoration: none;
 }
 
-.category::after {
-  content: "";
-  position: absolute;
-  bottom: -0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 64px;
-  height: 3px;
-  background: var(--accent);
-}
-
-/*──── mobile stacking */
-@media (max-width: 768px) {
-  .entry,
-  .left {
-    flex-direction: column;
-    align-items: flex-start;
+@media (width <= 900px) {
+  .lead {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
   }
 
-  .entry::before,
-  .left::before,
-  .right::before {
-    left: -5px;
-    right: auto;
-    top: 0.25rem;
-    pointer-events: none;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  .wrapper::before {
-    left: 8px;
-    transform: none;
-    pointer-events: none;
+  .group {
+    grid-template-columns: 0.65fr 1.35fr;
+    gap: 2rem;
   }
 }
 
-/* Visually hidden (a11y utility) */
-.visuallyHidden {
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
+@media (width <= 768px) {
+  .wrapper {
+    padding-inline: 1.25rem;
+  }
+
+  .group {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .groupHeading h2 {
+    position: static;
+  }
+
+  .index {
+    max-width: none;
+  }
+
+  .entry {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
 }

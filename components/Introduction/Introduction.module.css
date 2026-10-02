@@ -1,221 +1,158 @@
 .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-  width: 100%;
-  isolation: isolate; 
-  position: relative;
-}
-
-/* ──────── LEFT : COVER IMAGE ────────*/
-.image {
-  flex: 1 1 50%;
-  min-height: 60vh;
   position: relative;
   overflow: hidden;
-  z-index: 0;
-}
-
-.image > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* subtle gradient overlay so white text is always legible on mobile */
-.image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, transparent 60%);
-  z-index: 1;
-  pointer-events: none; /* Prevent overlay from blocking clicks */
-}
-
-/* ──────── RIGHT : CONTENT ────────*/
-.content {
-  flex: 1 1 50%;
-  position: relative;
-  z-index: 2; /* Ensure content (including buttons) is above image/overlay */
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(3rem, 6vw, 6rem) var(--gap-inline);
-  background: var(--bg-color);
-  color: var(--light-text);
-  gap: 1.75rem;
-}
-
-/* Display-font / headline styling */
-.title {
-  font-family: "Bebas Neue", "Oswald", sans-serif;
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  line-height: 0.9;
-  margin: 0;
-  color: var(--light-text);
-  padding-left: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.015em;
-}
-
-.title .highlight {
-  
-  color: var(--accent);
-}
-
-.subtitle {
-  padding-left: 2rem;
-  color: var(--light-text);
-  max-width: 38ch;
-  font-size: clamp(1rem, 1.4vw + 0.8rem, 1.3rem);
-  line-height: 1.6;
-  opacity: 0.85;
-}
-
-.buttons {
-  padding-left: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  position: relative;
-  z-index: 3;
-  pointer-events: auto;
-}
-
-.socials {
-  padding-left: 2rem;
-  display: flex;
-  gap: 0.65rem;
-  margin-top: 0.5rem;
-}
-
-.socials a {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--social-bg);
-  transition: transform 0.18s ease, background 0.18s ease;
-}
-
-.socials a:hover {
-  transform: translateY(-4px) scale(1.04);
-  background: var(--accent);
-}
-
-/* Arrow bounce */
-.arrowWrap {
-  padding-left: 3rem;
-  position: absolute;
-  bottom: 7rem;
-  left: 50%;
-  transform: translateX(-50%);
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  z-index: 2; /* ensure arrow sits above content */
-  pointer-events: none;
+  justify-content: center;
+  padding: 100px 4vw 2rem;
+  color: #fff;
+  background: #050505;
 }
 
-.arrowText {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--accent);
+.background {
+  object-fit: cover;
+  object-position: center 50%;
+  filter: saturate(0.5);
 }
 
-/* ──────── Mobile : stack layout ────────*/
-@media (max-width: 768px) {
-  .wrapper {
-    flex-direction: column;
-  }
-  .image,
-  .content {
-    flex: 1 1 auto;
-    width: 100%;
-  }
-  .content {
-    padding: calc(var(--gap-inline) * 1.5) var(--gap-inline);
-    text-align: center;
-    align-items: center;
-  }
-  .title,
-  .subtitle,
-  .buttons,
-  .socials {
-    padding-left: 0;
-  }
-  .buttons {
-    justify-content: center;
-  }
-  .socials {
-    justify-content: center;
-  }
-  .arrowWrap {
-    display: none; /* hides arrow on small screens */
-  }
-}
-
-/* Animate gradient inside highlight on hover */
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  .highlight {
-    background: linear-gradient(128deg, var(--gradient-start), var(--gradient-end), var(--accent));
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradientShift 6s linear infinite;
-  }
-  @keyframes gradientShift {
-    to {
-      background-position: 200% 0;
-    }
-  }
-}
-
-/* Optional backdrop blur when hero overlays content below */
-.wrapper::after {
-  content: "";
+.shade {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: clamp(4rem, 8vw, 6rem);
-  pointer-events: none; /* Prevent wrapper overlay from blocking clicks */
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 55%),
+    rgb(0 0 0 / 60%) 40%,
+    rgb(0 0 0 / 85%)
+  );
+}
+
+.identity {
+  position: relative;
   z-index: 1;
+  text-align: center;
 }
 
-/* Utility for visually hidden elements (a11y) */
-.visuallyHidden {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.greeting {
+  margin: 0 0 1.2rem;
+  font-size: 0.85rem;
 }
 
-.journeyBtn {
-  background: var(--accent);
-  color: var(--text-color);
-}
-.journeyBtn:hover {
-  color: var(--text-color);
-  background: var(--accent-hover);
+.identity h1 {
+  margin: 0;
+  font-size: clamp(3.2rem, 11vw, 10.5rem);
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
 }
 
-.projectsBtn {
-  background: var(--accent);
-  color: var(--text-color);
+.caption {
+  position: absolute;
+  z-index: 1;
+  right: 4vw;
+  bottom: 110px;
+  left: 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
 }
-.projectsBtn:hover {
-  background: var(--accent-hover);
-  color: var(--text-color);
+
+.caption p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.caption a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #fff;
+}
+
+.bottomline {
+  position: absolute;
+  z-index: 1;
+  right: 4vw;
+  bottom: 1.75rem;
+  left: 4vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.links,
+.socials {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.links a {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 44px;
+  color: #fff;
+  font-size: 0.75rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: #fff;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+@media (width <= 600px) {
+  .wrapper {
+    padding-inline: 1.25rem;
+    min-height: 100svh;
+  }
+
+  .caption {
+    bottom: 115px;
+  }
+
+  .caption p {
+    max-width: 30ch;
+    font-size: 0.85rem;
+  }
+
+  .bottomline {
+    left: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .links {
+    gap: 1rem;
+  }
+
+  .socials {
+    gap: 0.85rem;
+  }
+
+  .links a {
+    font-size: 0.65rem;
+  }
+}
+
+.photoMotion {
+  position: absolute;
+  inset: -12% 0;
+  will-change: transform;
 }

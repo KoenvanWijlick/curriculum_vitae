@@ -1,139 +1,91 @@
-// components/Introduction/Introduction.tsx
 "use client";
-import React from "react";
-import Link from "next/link";
-import { Button, Group } from "@mantine/core";
+import { useRef } from "react";
 import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  IconArrowDown,
+  IconArrowUpRight,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconMail,
-  IconRocket,
+  IconDownload,
 } from "@tabler/icons-react";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import styles from "./Introduction.module.css";
+import classes from "./Introduction.module.css";
 
 export default function Introduction() {
   const { t } = useTranslation();
-
-  const cvPdf = "/Koen_van_Wijlick_CV_EN.pdf";
-
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const reduced = useReducedMotion();
   return (
-    <section id="intro" className={styles.wrapper}>
-      {/* Left – full‑bleed photo (swap src for your own) */}
-      <div className={styles.image} aria-hidden="true">
-        <img
-          src="/personal_image.jpeg"
-          alt="Mountain landscape with Koen looking ahead"
-        />
-      </div>
-
-      {/* Right – content */}
+    <section id="intro" ref={ref} className={classes.wrapper}>
       <motion.div
-        initial={{ opacity: 0, x: 60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={styles.content}
+        className={classes.photoMotion}
+        style={{ y: reduced ? 0 : y }}
       >
-        <h1 className={styles.title}>
-          {t("intro.greeting", "Hi, I’m")}{" "}
-          <span className={styles.highlight}>Koen van Wijlick</span>
+        <Image
+          src="/Frontpage_1.jpeg"
+          alt={t("design.heroPhotoAlt")}
+          fill
+          sizes="100vw"
+          preload
+          className={classes.background}
+        />
+      </motion.div>
+      <div className={classes.shade} />
+      <div className={classes.identity}>
+        <p className={classes.greeting}>{t("intro.greeting")}</p>
+        <h1>
+          Koen van <br />
+          Wijlick
         </h1>
-
-        <p className={styles.subtitle}>
-          {t(
-            "intro.subtitle",
-            "Mechatronics graduate & AI engineer building autonomous greenhouse robots.",
-          )}
-        </p>
-
-        <Group className={styles.buttons} gap="sm">
-          <Button
-            className={styles.journeyBtn}
-            variant="light"
-            radius="xl"
-            size="md"
-            component="a"
-            href="#career"
-            leftSection={<IconRocket size={18} />}
-            style={{ textTransform: "none" }}
-          >
-            {t("intro.viewJourney", "View my journey")}
-          </Button>
-          <Button
-            variant="default"
-            radius="xl"
-            size="md"
-            component="a"
-            href={cvPdf}
-            download
-          >
-            {t("intro.downloadCV", "Download CV")}
-          </Button>
-          <Button
-            className={styles.projectsBtn}
-            variant="outline"
-            radius="xl"
-            size="md"
-            component={Link}
-            href="/projects"
-            leftSection={<IconRocket size={18} />}
-          >
-            {t("intro.viewProjects", "Projects")}
-          </Button>
-        </Group>
-
-        <div className={styles.socials}>
-          <a href="mailto:koenvanwijlick@gmail.com" aria-label="Email Koen">
-            <IconMail size={24} />
+      </div>
+      <div className={classes.caption}>
+        <p>{t("design.heroRole")}</p>
+        <a href="#foqus" aria-label={t("design.scrollExplore")}>
+          <IconArrowDown size={22} />
+        </a>
+      </div>
+      <div className={classes.bottomline}>
+        <div className={classes.links}>
+          <Link href="/projects">
+            {t("intro.viewProjects")}
+            <IconArrowUpRight size={15} />
+          </Link>
+          <a href="/Koen_van_Wijlick_CV_EN.pdf" download>
+            {t("intro.downloadCV")}
+            <IconDownload size={15} />
           </a>
+        </div>
+        <div className={classes.socials}>
           <a
             href="https://github.com/Pecako2001"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Koen’s GitHub"
+            aria-label="GitHub"
           >
-            <IconBrandGithub size={24} />
+            <IconBrandGithub size={18} />
           </a>
           <a
             href="https://www.linkedin.com/in/koen-van-wijlick-00b820204/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Koen’s LinkedIn"
+            aria-label="LinkedIn"
           >
-            <IconBrandLinkedin size={24} />
+            <IconBrandLinkedin size={18} />
           </a>
         </div>
-      </motion.div>
-
-      {/* Down‑arrow hint (desktop only) */}
-      <motion.div
-        className={styles.arrowWrap}
-        initial={{ y: 0 }}
-        animate={{ y: [0, 14, 0] }}
-        transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-      >
-        <span className={styles.arrowText}>
-          {t("intro.takeRoad", "Scroll for more")}
-        </span>
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 36 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M18 6V30M18 30L8 20M18 30L28 20"
-            stroke="var(--accent)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </motion.div>
+      </div>
     </section>
   );
 }

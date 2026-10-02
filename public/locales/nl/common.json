@@ -1,8 +1,8 @@
 {
   "intro": {
     "greeting": "Hoi, ik ben",
-    "subtitle": "Mechatronica afgestudeerde & AI-engineer die autonome kasrobots bouwt.",
-    "viewJourney": "Bekijk mijn reis",
+    "subtitle": "AI Software Engineer bij FOQUS Vision, waar ik software en integraties ontwikkel voor slimme visuele kwaliteitscontrole.",
+    "viewJourney": "Bekijk mijn cv",
     "downloadCV": "Download CV",
     "takeRoad": "Ontdek het pad dat ik bewandel",
     "viewProjects": "Projecten"
@@ -43,7 +43,7 @@
     "work3": {
       "label": "Restaurant Op d’n Berg, Helden",
       "sub": "maart 2017 – augustus 2022",
-      "info": "Bediening, snackbar en keuken\nWerkte nauw samen met collega’s en vervulde een leidende rol in personeelsbeheer en het waarborgen van een soepele bedrijfsvoering."
+      "info": "Bediening, snackbar en keuken\nIk werkte nauw samen met collega’s en stuurde aan waar nodig."
     },
     "work4": {
       "label": "Stichting Jong Nederland Helden",
@@ -69,11 +69,22 @@
       "label": "Diverse bedrijven (Christiaens Group BV, WP Haton, Aliaxis)",
       "sub": "mei 2018 – maart 2019",
       "info": "Stage (MBO niveau 4, jaar 3,2,1)\nVerkreeg brede ervaring in mechatronica via meerdere stages. Taken: 2D-elektrische schema’s tekenen, Excel-berekeningen voor mechanische componenten, schakelkasten assembleren en afdelingsoverschrijdende samenwerking voor een sterke basis in industriële automatisering en ontwerp."
+    },
+    "foqus": {
+      "label": "FOQUS Vision, Deurne",
+      "info": "AI Software Engineer\nOntwikkelen van AI-software en integraties voor visuele kwaliteitscontrole in de industrie.",
+      "sub": "2025 – heden"
+    },
+    "volunteerBoard": {
+      "label": "Stichting Jong Nederland Helden",
+      "sub": "Mei 2026 – heden",
+      "info": "Bestuurslid"
     }
   },
   "about": {
-    "heading": "Wie ik ben",
-    "paragraph": "Ik ben Koen van Wijlick — een mechatronica-ingenieur die zich verdiept in kunstmatige intelligentie. Ik ben gedreven om technologie slimmer, duurzamer en mensgerichter te maken. Al van jongs af aan ben ik gefascineerd door hoe mechatronische systemen tot leven komen wanneer ze worden aangestuurd door slimme software. Deze nieuwsgierigheid leidt me naar een opleiding Mechatronica, waarin ik me verdiep in robotica, computer vision en autonome systemen. Ik voel me thuis op het snijvlak van hardware en software — ik laat slimme elektrische componenten samenwerken, bouw intelligente besturing en haal waardevolle inzichten uit camerafeeds met machine learning. Mijn aanpak draait om duidelijke communicatie, samenwerking en snelle, doordachte iteratie. Of ik nu embedded systemen optimaliseer of nieuwe interface-ideeën schets, ik streef ernaar oplossingen te ontwikkelen die niet alleen technisch sterk zijn, maar ook bijdragen aan mens en milieu. Deel jij diezelfde passie voor technologie die het verschil maakt?"
+    "heading": "Over mij",
+    "paragraph": "Ik heb Mechatronica gestudeerd bij Fontys in Venlo, na mijn mbo-opleiding Mechatronica. Ik werk graag aan vraagstukken waarin software en machines samenkomen: camerasystemen, robotbesturing en industriële automatisering.\nBuiten mijn werk houd ik van hardlopen.",
+    "photoAlt": "Portret van Koen van Wijlick"
   },
   "navbar": {
     "home": "Home",
@@ -82,28 +93,38 @@
     "brandFull": "Curriculum Vitae",
     "brandShort": "CV",
     "light": "Licht",
-    "dark": "Donker"
+    "dark": "Donker",
+    "primary": "Hoofdnavigatie",
+    "skipToContent": "Ga naar inhoud",
+    "toggleTheme": "Wissel thema",
+    "openMenu": "Open navigatiemenu",
+    "closeMenu": "Sluit navigatiemenu",
+    "menu": "Navigatie",
+    "about": "Over mij",
+    "skills": "Vaardigheden"
   },
   "contact": {
-    "heading": "Laten we praten",
+    "heading": "Contact",
     "name": "Naam",
     "email": "E‑mail",
     "reason": "Reden van contact",
     "preferredDate": "Voorkeursdatum",
     "submit": "Versturen",
-    "thanks": "Bedankt! Ik neem snel contact op."
+    "thanks": "Bedankt! Ik neem snel contact op.",
+    "emailLabel": "E-mail:",
+    "sendMail": "Stuur een e-mail"
   },
   "software": {
-    "heading": "Softwareervaring & certificaten",
+    "heading": "Vaardigheden & certificaten",
     "certHeading": "Certificaten",
     "skillsHeading": "Software- en programmeervaardigheden",
     "cert1": "SolidWorks Mechanical Design Associate – Uitgegeven: mei 2019 – geen vervaldatum. Credential ID: C-5SUCTJW3L4. Bevestigt vaardigheid in 3D CAD-modelleren, assemblages maken en tekeningen opstellen met SolidWorks.",
     "cert2": "Basisveiligheid VCA – Uitgegeven: maart 2018 – Verloopt: maart 2028. Credential ID: 541448.05174689. Gecertificeerd voor veiligheid en gezondheid in risicovolle omgevingen volgens de Nederlandse/Belgische VCA-norm.",
-    "skill1": "Python, C++ – Robotica, AI, computer vision (YOLO, ROS 2, OpenCV)",
-    "skill2": "React, TypeScript, JavaScript – Moderne frontendontwikkeling",
-    "skill3": "PostgreSQL, SQLite – Databaseontwerp & integratie",
+    "skill1": "Python, C++ – Robotica, AI, computer vision (YOLO, ROS 2, OpenCV, TensorFlow)",
+    "skill2": "React, TypeScript, JavaScript, Tailwind – Moderne frontendontwikkeling",
+    "skill3": "PostgreSQL, SQLite, Supabase – Databaseontwerp & integratie",
     "skill4": "FastAPI, MQTT – Backend-API’s & realtime-communicatie",
-    "skill5": "Docker, Git, Linux – Containerisatie, versiebeheer & operations",
+    "skill5": "Docker, Git, GitHub Actions, Linux – Containerisatie, versiebeheer & operations",
     "skill6": "Siemens PLC (TIA Portal) – Industriële automatisering & besturing",
     "skill7": "SolidWorks, Inventor, AutoCAD – 3D-modelleren & 2D-schema’s",
     "skill8": "Redis, WebSockets – In-memory opslag & live datastreaming",
@@ -123,13 +144,8 @@
     "items": {
       "cvsite": {
         "title": "Curriculum Vitae-website",
-        "description": "De CV-website is een interactieve en responsieve portfolio gebouwd met Next.js en de Mantine UI-bibliotheek. Het toont mijn professionele ervaring, projecten en vaardigheden in een gebruiksvriendelijk formaat. Er zijn dynamische secties voor opleiding, werkervaring, technische skills en persoonlijke projecten, alles gepresenteerd met vloeiende animaties. De site bevat downloadbare documenten, live projectlinks en een contactformulier. Met de focus op prestaties en toegankelijkheid demonstreert dit project mijn frontendvaardigheden en aandacht voor gebruikservaring.",
+        "description": "Mijn eigen cv-website, gebouwd met Next.js, React en Mantine. Hier deel ik mijn werkervaring en projecten. De site ondersteunt Nederlands en Engels, een licht en donker thema en een downloadbaar cv.",
         "tag": "Webproject"
-      },
-      "runEvolve": {
-        "title": "Run Evolve-applicatie",
-        "description": "Een van mijn passies is hardlopen. Mijn interesse in kunstmatige intelligentie inspireerde me tot het maken van een persoonlijke hardloopmaatje: een applicatie die mijn prestaties analyseert om inzichten te geven en beste tijden te voorspellen. De app genereert trainingsschema's afgestemd op mijn niveau en voortgang. Ik gebruik dit project om nieuwe AI-modellen uit te proberen en zo de nieuwste ontwikkelingen praktisch te verkennen.",
-        "tag": "In ontwikkeling"
       },
       "growbot": {
         "title": "Growbot",
@@ -145,7 +161,63 @@
         "title": "AI-detectie",
         "description": "Tijdens mijn stage bij Mechatronic Machinery ontwikkelde ik een AI-platform voor objectdetectie en lokalisatie waarmee ik een eindcijfer van 9,0 behaalde. Het systeem laat robots objecten herkennen en nauwkeurig positioneren voor automatische picktaken, wat nieuwe mogelijkheden biedt voor slimme industriële automatisering. Het platform maakt het eenvoudig om AI-netwerken te trainen en inzetten, waardoor geavanceerde machine vision beter toegankelijk wordt.",
         "tag": "Stage"
+      },
+      "foqus": {
+        "title": "FOQUS",
+        "tag": "AI-visieplatform",
+        "description": "FOQUS combineert zelflerende AI en computer vision voor kwaliteitscontrole in de voedingsmiddelen- en maakindustrie. Het platform verbindt QUBE voor kwaliteitsinspectie en AI-modeltraining met OptIQ voor inline inspectie. Als AI Software Engineer werk ik aan AI-software en integraties. De FOQUS-website presenteert de oplossingen, het team en de toepassingen voor productiebedrijven."
       }
-    }
+    },
+    "expand": "Toon meer",
+    "collapse": "Toon minder"
+  },
+  "design": {
+    "discipline": "Mechatronica · AI · Robotica",
+    "location": "Gevestigd in Nederland",
+    "heroStatement": "Ik ben een mechatronica-ingenieur uit Panningen. Bij FOQUS Vision ontwikkel ik AI-software en integraties voor visuele kwaliteitscontrole.",
+    "currently": "AI Software Engineer bij",
+    "heroNote": "ENGINEER. BOUWER. ONTDEKKER.",
+    "scrollExplore": "Werkervaring",
+    "currentFocus": "Huidig werk",
+    "currentRole": "Huidige functie",
+    "foqusHeadline": "Machines leren\nhet verschil te zien.",
+    "foqusDescription": "Bij FOQUS Vision ontwikkel ik AI-software en integraties voor visuele kwaliteitscontrole.",
+    "myRole": "Mijn rol bij FOQUS",
+    "exploreFoqus": "Ontdek FOQUS",
+    "moreProjects": "Meer projecten",
+    "focus": {
+      "vision": "Computer vision",
+      "software": "AI-software",
+      "integration": "Industriële integratie"
+    },
+    "aboutHeadline": "Over mij",
+    "outdoorPhotoAlt": "Koen verkent een berglandschap",
+    "beyondCode": "Buiten het werk",
+    "aboutLead": "",
+    "journey": "CV",
+    "careerHeadline": "Ervaring & opleiding",
+    "careerDescription": "",
+    "nextChapter": "Het volgende hoofdstuk wordt nog geschreven.",
+    "toolkit": "Mijn gereedschap",
+    "skillsHeadline": "Technische vaardigheden",
+    "skillsDescription": "Van de eerste schets tot een werkend systeem. Praktische tools om over disciplines heen te bouwen.",
+    "credentials": "Ervaring & certificaten",
+    "contactHeadline": "Contact",
+    "contactDescription": "Je kunt me bereiken via e-mail of LinkedIn.",
+    "backToTop": "Naar boven",
+    "pauseMotion": "Animaties pauzeren",
+    "resumeMotion": "Animaties hervatten",
+    "motion": "Animatie",
+    "projectsLabel": "Projecten",
+    "projectsDescription": "Projecten uit mijn werk, opleiding en eigen interesses.",
+    "projectCurrent": "Mijn huidige werk bij FOQUS Vision",
+    "viewWebsite": "Bezoek website",
+    "projectIndex": "Project",
+    "projectDetails": "Projectdetails",
+    "foqusVisual": "ZELFLERENDE VISIE",
+    "cvVisual": "DESIGN × ONTWIKKELING",
+    "backHome": "Terug naar home",
+    "heroRole": "Mechatronica-ingenieur · AI Software Engineer bij FOQUS Vision",
+    "heroPhotoAlt": "Growbot-afstudeerproject in een kas"
   }
 }

@@ -1,73 +1,105 @@
-/* SECTION WRAPPER */
 .wrapper {
-  background: transparent;
-  padding: clamp(4rem, 7vw, 6rem) 1rem;
-  display: flex;
-  justify-content: center;
-  color: var(--light-text);
+  padding: var(--section-padding) 2rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface-alt);
 }
 
-/* Card / form */
-.form {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 520px;
-  background: var(--card-bg);
-  border-radius: var(--card-radius);
-  padding: clamp(2rem, 5vw, 3rem);
-  box-shadow: 0 12px 42px rgb(0 0 0 / 0.45);
-  backdrop-filter: blur(8px);
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+.inner {
+  max-width: calc(var(--page-width) - 4rem);
+  margin: auto;
 }
 
-.heading {
-  font-family: "Bebas Neue", "Oswald", sans-serif;
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
-  letter-spacing: 0.03em;
-  text-align: center;
-  margin-bottom: 1rem;
+.title {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.contactRow {
+  margin: 2rem 0 5rem;
+}
+
+.contactRow > p {
+  margin: 0 0 1.5rem;
+  color: var(--muted-text);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.email {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  max-width: 100%;
+  color: var(--text-color);
+  font-size: clamp(1rem, 2.3vw, 2rem);
+  letter-spacing: -0.025em;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.email:hover {
   color: var(--accent);
 }
 
-/* Mantine input override (light border → accent on focus) */
-.inputRoot .mantine-Input-input {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: var(--text-color);
+.email svg {
+  flex-shrink: 0;
+  color: var(--accent);
 }
 
-.inputRoot .mantine-Input-input:focus-within {
-  border-color: var(--accent);
+.signature {
+  margin: 6rem 0 2rem;
+  font-size: clamp(2rem, 7.5vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
-/* Submit button accent */
-.submitBtn {
-  background: var(--accent);
-  color: var(--text-color);
-  transition: background 0.25s ease;
-}
-.submitBtn:hover {
-  background: var(--accent-hover);
-}
-
-/* Decorative blurred gradient behind card */
-.wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(at top left, rgba(224, 108, 52, 0.25), transparent 60%),
-    radial-gradient(at bottom right, rgba(224, 108, 52, 0.15), transparent 60%);
-  filter: blur(120px);
-  z-index: 0;
-  pointer-events: none;
+.footer {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-text);
+  font-size: 0.7rem;
 }
 
-/* Responsive tweaks */
-@media (max-width: 480px) {
-  .form {
-    padding: 1.5rem;
+.footer > div {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer a {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+@media (width <= 768px) {
+  .wrapper {
+    padding-inline: 1.25rem;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+  }
+
+  .backTop {
+    margin-left: auto;
+  }
+
+  .signature {
+    margin-top: 4rem;
   }
 }
