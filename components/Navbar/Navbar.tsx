@@ -1,193 +1,186 @@
 "use client";
-import React from "react";
+
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
-import {
-  ActionIcon,
-  Burger,
-  Drawer,
-  Group,
-  Stack,
-  Button,
-  useMantineTheme,
-} from "@mantine/core";
+import { usePathname } from "next/navigation";
+import { Burger, Drawer, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown, IconBrandLinkedin } from "@tabler/icons-react";
-import classes from "./Navbar.module.css";
+import { IconArrowUpRight, IconMoon, IconSun } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../../app/providers";
+import classes from "./Navbar.module.css";
 
-const LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/#contact" },
+const links = [
+  { label: "navbar.home", href: "/" },
+  { label: "navbar.about", href: "/#about" },
+  { label: "design.journey", href: "/#career" },
+  { label: "navbar.skills", href: "/#certs" },
+  { label: "navbar.projects", href: "/projects" },
+  { label: "navbar.contact", href: "/#contact" },
+];
+const languages = [
+  { code: "en", label: "English" },
+  { code: "nl", label: "Nederlands" },
 ];
 
-const SOCIALS = [
-  {
-    href: "https://www.linkedin.com/in/koen-van-wijlick-00b820204/",
-    Icon: IconBrandLinkedin,
-    label: "LinkedIn",
-  },
-];
-
-const LANGS = [
-  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
-  { code: "en", label: "English", flag: "🇬🇧" },
-];
+function subscribeScroll(callback: () => void) {
+  window.addEventListener("scroll", callback, { passive: true });
+  window.addEventListener("resize", callback);
+  return () => {
+    window.removeEventListener("scroll", callback);
+    window.removeEventListener("resize", callback);
+  };
+}
+const scrollSnapshot = () => window.scrollY > 80;
+const serverScrollSnapshot = () => false;
+function sectionSnapshot() {
+  let current = "/";
+  for (const link of links) {
+    const id = link.href.split("#")[1];
+    const section = id ? document.getElementById(id) : null;
+    if (section && section.getBoundingClientRect().top <= 160) {
+      current = link.href;
+    }
+  }
+  return current;
+}
+const serverSectionSnapshot = () => "/";
 
 export default function Navbar() {
   const [opened, { open, close }] = useDisclosure(false);
-  const { theme, setThemeMode } = useTheme();
-  const mantineTheme = useMantineTheme();
-  const { i18n } = useTranslation();
-  const currentLang = i18n.language || "nl";
-
-  // Set burger color based on theme
-  const burgerColor =
-    theme === "theme-dark"
-      ? mantineTheme.white
-      : mantineTheme.colors.dark[7] || "#222";
-
+  const { toggleColorScheme } = useMantineColorScheme();
+  const { t, i18n } = useTranslation();
+  const pathname = usePathname();
+  const scrolled = useSyncExternalStore(
+    subscribeScroll,
+    scrollSnapshot,
+    serverScrollSnapshot,
+  );
+  const section = useSyncExternalStore(
+    subscribeScroll,
+    sectionSnapshot,
+    serverSectionSnapshot,
+  );
+  const activeHref = pathname === "/" ? section : pathname;
+  const currentLocation = (href: string) =>
+    activeHref === href
+      ? href.includes("#")
+        ? "location"
+        : "page"
+      : undefined;
+  const languageButtons = (mobile = false) =>
+    languages.map((language) => (
+      <button
+        key={language.code}
+        type="button"
+        className={`${classes.langBtn} ${i18n.language === language.code ? classes.langActive : ""}`}
+        aria-label={language.label}
+        aria-pressed={i18n.language === language.code}
+        onClick={() => {
+          void i18n.changeLanguage(language.code);
+          if (mobile) close();
+        }}
+      >
+        {language.code.toUpperCase()}
+      </button>
+    ));
   return (
-    <header className={classes.navbar}>
+    <header
+      className={`${classes.navbar} ${pathname === "/" && !scrolled ? classes.onHero : ""}`}
+    >
+      <a href="#main-content" className="skipLink">
+        {t("navbar.skipToContent")}
+      </a>
       <div className={classes.inner}>
-        {/* Brand */}
-        <Link href="/" className={classes.brand}>
-          <img src="/Icon.png" alt="Logo" className={classes.brandLogo} />
-          <span className={classes.brandText}>Personal&nbsp;Profile&nbsp;</span>
+        <Link
+          href="/"
+          className={classes.brand}
+          aria-label="Koen van Wijlick — Home"
+        >
+          <span className={classes.brandText}>Koen van Wijlick</span>
         </Link>
-
-        {/* Links */}
-        <nav className={classes.links} aria-label="Primary">
-          {LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className={classes.link}>
-              {link.label}
+        <nav className={classes.links} aria-label={t("navbar.primary")}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`${classes.link} ${activeHref === link.href ? classes.active : ""}`}
+              aria-current={currentLocation(link.href)}
+            >
+              {t(link.label)}
             </Link>
           ))}
         </nav>
-
-        {/* Controls */}
         <div className={classes.controls}>
-          {/* Social */}
-          <Group gap="xs" className="socials" visibleFrom="md">
-            {SOCIALS.map(({ href, Icon, label }) => (
-              <ActionIcon
-                key={href}
-                component="a"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="subtle"
-                aria-label={label}
-                style={{ color: burgerColor }}
-              >
-                <Icon size={20} />
-              </ActionIcon>
-            ))}
-          </Group>
-
-          {/* Language */}
-          <Group className="langSwitcher" visibleFrom="md">
-            {LANGS.map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                onClick={() => i18n.changeLanguage(lang.code)}
-                className={`${classes.langBtn} ${
-                  currentLang === lang.code ? classes.langActive : ""
-                }`}
-                aria-label={lang.label}
-              >
-                {lang.flag}
-              </button>
-            ))}
-          </Group>
-
-          {/* Theme */}
+          <div className={classes.languages}>{languageButtons()}</div>
           <button
             className={classes.themeBtn}
             type="button"
-            onClick={() =>
-              setThemeMode(
-                theme === "theme-dark" ? "theme-light" : "theme-dark",
-              )
-            }
-            aria-label="Toggle theme"
+            onClick={() => toggleColorScheme()}
+            aria-label={t("navbar.toggleTheme")}
           >
-            {theme === "theme-dark" ? "Dark" : "Light"}
-            <IconChevronDown size={14} />
+            <span className={classes.darkLabel}>
+              <IconSun size={18} />
+            </span>
+            <span className={classes.lightLabel}>
+              <IconMoon size={18} />
+            </span>
           </button>
-
-          {/* Burger */}
           <Burger
             opened={opened}
             onClick={open}
             className={classes.burger}
-            aria-label="Open navigation drawer"
-            color={burgerColor}
+            aria-label={t("navbar.openMenu")}
+            aria-expanded={opened}
+            color="currentColor"
+            size="sm"
           />
         </div>
       </div>
-
-      {/* Mobile drawer */}
-      <Drawer opened={opened} onClose={close} size="100%" padding="md">
-        <Stack gap="lg">
-          {LINKS.map((link) => (
+      <Drawer
+        opened={opened}
+        onClose={close}
+        size="100%"
+        padding="xl"
+        title={t("navbar.menu")}
+        closeButtonProps={{ "aria-label": t("navbar.closeMenu") }}
+        styles={{
+          content: { background: "var(--bg-color)" },
+          header: { background: "var(--bg-color)" },
+        }}
+      >
+        <div className={classes.drawerLinks}>
+          {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={close}
               className={classes.drawerLink}
+              aria-current={currentLocation(link.href)}
             >
-              {link.label}
+              {t(link.label)}
+              <IconArrowUpRight size={24} />
             </Link>
           ))}
-          <Group gap="sm">
-            {LANGS.map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                onClick={() => {
-                  i18n.changeLanguage(lang.code);
-                  close();
-                }}
-                className={`${classes.langBtn} ${
-                  currentLang === lang.code ? classes.langActive : ""
-                }`}
-                aria-label={lang.label}
-              >
-                {lang.flag}
-              </button>
-            ))}
-          </Group>
-          <Group gap="xs">
-            {SOCIALS.map(({ href, Icon, label }) => (
-              <ActionIcon
-                key={href}
-                component="a"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="subtle"
-                aria-label={label}
-                style={{ color: burgerColor }}
-              >
-                <Icon size={22} />
-              </ActionIcon>
-            ))}
-          </Group>
-          <Button
-            variant="outline"
+        </div>
+        <div className={classes.drawerControls}>
+          {languageButtons(true)}
+          <button
+            className={classes.drawerTheme}
+            type="button"
             onClick={() => {
-              setThemeMode(
-                theme === "theme-dark" ? "theme-light" : "theme-dark",
-              );
+              toggleColorScheme();
               close();
             }}
           >
-            Toggle Theme
-          </Button>
-        </Stack>
+            {t("navbar.toggleTheme")}
+          </button>
+        </div>
+        <a
+          className={classes.drawerEmail}
+          href="mailto:koenvanwijlick@gmail.com"
+        >
+          koenvanwijlick@gmail.com
+        </a>
       </Drawer>
     </header>
   );

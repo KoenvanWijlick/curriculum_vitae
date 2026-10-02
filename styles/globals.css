@@ -1,18 +1,18 @@
 /* Global CSS variables */
 :root {
   --primary: #1976d2;
-  --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  --shadow: 0 6px 20px rgb(0 0 0 / 10%);
   --bg-gradient: linear-gradient(135deg, #e3f2fd 0%, #fffde7 100%);
-  --surface-bg: rgba(255, 255, 255, 0.6);
+  --surface-bg: rgb(255 255 255 / 60%);
 }
 
 [data-mantine-color-scheme="dark"] {
   --bg-gradient: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
-  --surface-bg: rgba(0, 0, 0, 0.6);
+  --surface-bg: rgb(0 0 0 / 60%);
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   margin: 0;
   background: var(--bg-gradient);
 }

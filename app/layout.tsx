@@ -1,48 +1,39 @@
-"use client";
-
+import type { Metadata } from "next";
+import { mantineHtmlProps } from "@mantine/core";
+import { Analytics } from "@vercel/analytics/next";
 import "@mantine/core/styles.css";
 import "./module.css";
-import { AppShell } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
 import Providers from "./providers";
-import Navbar from "../components/Navbar/Navbar"; // Your custom Navbar component
-import I18nClientProvider from "../components/I18nClientProvider";
-import { useTranslation } from "react-i18next";
-import { Analytics } from '@vercel/analytics/next';
+import Navbar from "../components/Navbar/Navbar";
+import ScrollScene from "../components/ScrollScene/ScrollScene";
 
-function AppLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <AppShell>
-      <AppShell.Header>
-        <Navbar />
-      </AppShell.Header>
-
-      <AppShell.Main style={{ paddingTop: 60 }}>{children}</AppShell.Main>
-    </AppShell>
-  );
-}
+export const metadata: Metadata = {
+  metadataBase: new URL("https://koenvanwijlick.com"),
+  title: {
+    default: "Koen van Wijlick | Mechatronics & AI Engineer",
+    template: "%s | Koen van Wijlick",
+  },
+  description:
+    "Explore Koen van Wijlick’s experience, projects, and skills in mechatronics, robotics, and artificial intelligence.",
+  icons: { icon: "/Icon.png" },
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { i18n } = useTranslation();
   return (
-    <html lang={i18n.language}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Curriculum Vitae</title>
-        <link rel="icon" href="/Icon.png" />
-      </head>
+    <html lang="en" {...mantineHtmlProps} data-mantine-color-scheme="dark">
       <body>
-        <I18nClientProvider>
-          <Providers>
-            <Notifications />
-            <AppLayout>{children}</AppLayout>
-            <Analytics />
-          </Providers>
-        </I18nClientProvider>
+        <Providers>
+          <ScrollScene />
+          <Navbar />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+          </main>
+          {process.env.VERCEL && <Analytics />}
+        </Providers>
       </body>
     </html>
   );

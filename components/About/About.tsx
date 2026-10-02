@@ -1,34 +1,42 @@
-// components/AboutMe/AboutMe.tsx
 "use client";
-import React from "react";
+
+import Image from "next/image";
+import { IconArrowUpRight } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import Reveal from "../Reveal/Reveal";
 import classes from "./About.module.css";
 
 export default function AboutMe() {
   const { t } = useTranslation();
-
-  const paragraph = t("about.paragraph")
-    .split("\n")
-    .map((line, idx) => (
-      <React.Fragment key={idx}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
-
   return (
     <section id="about" className={classes.wrapper}>
+      <Reveal className={classes.heading}>
+        <h2 className="sectionTitle">{t("design.aboutHeadline")}</h2>
+      </Reveal>
       <div className={classes.inner}>
-        {/* Left – photo */}
-        <div className={classes.photoWrap}>
-          <img src="/avatar.jpg" alt="Koen van Wijlick smiling" />
+        <div className={classes.imageColumn}>
+          <div className={classes.photoWrap}>
+            <Image
+              src="/personal_image.jpeg"
+              alt={t("design.outdoorPhotoAlt")}
+              fill
+              sizes="(max-width: 768px) 100vw, 450px"
+            />
+          </div>
         </div>
-
-        {/* Right – introduction */}
-        <article className={classes.content}>
-          <h2 className={classes.heading}>{t("about.heading")}</h2>
-          <p className={classes.paragraph}>{paragraph}</p>
-        </article>
+        <div className={classes.content}>
+          {t("about.paragraph")
+            .split("\n")
+            .map((paragraph, index) => (
+              <Reveal key={index}>
+                <p className={classes.paragraph}>{paragraph}</p>
+              </Reveal>
+            ))}
+          <a className={classes.journey} href="#career">
+            {t("intro.viewJourney")}
+            <IconArrowUpRight size={18} />
+          </a>
+        </div>
       </div>
     </section>
   );

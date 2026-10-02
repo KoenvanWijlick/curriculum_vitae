@@ -1,146 +1,224 @@
-/* SECTION */
 .wrapper {
-    background: var(--bg-color);
-    padding: clamp(4rem, 7vw, 6rem) 1rem;
-    color: var(--light-text);
-    overflow: hidden;
+  padding-bottom: 2rem;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: end;
+  min-height: 65svh;
+  padding: 8rem max(2rem, calc((100vw - var(--page-width)) / 2 + 2rem)) 4rem;
+  background: #050505;
+  color: #fff;
+  overflow: hidden;
+}
+
+.cover {
+  object-fit: cover;
+  object-position: center 45%;
+  filter: saturate(0.5);
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 65%), rgb(0 0 0 / 80%));
+}
+
+.headerContent {
+  position: relative;
+  z-index: 1;
+}
+
+.heading {
+  max-width: 16ch;
+  margin: 0 0 1.5rem;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.subtitle {
+  max-width: 50ch;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.list {
+  max-width: var(--page-width);
+  margin: auto;
+  padding: var(--section-padding) 2rem;
+  display: grid;
+  gap: 5rem;
+}
+
+.project {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.meta {
+  margin-bottom: 1.5rem;
+  color: var(--muted-text);
+  font-size: 0.75rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.visual {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+
+.media {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 550px;
+  object-fit: contain;
+}
+
+.content {
+  min-width: 0;
+}
+
+.content h2 {
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.current {
+  margin: 0 0 1rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tag {
+  color: var(--muted-text);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0;
+  margin-top: 0.5rem;
+  border: 0;
+  color: var(--accent);
+  background: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.actions a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  color: var(--text-color);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.actions a:hover {
+  color: var(--accent);
+}
+
+.textOnly {
+  grid-template-columns: 1fr;
+}
+
+.textOnly .visual {
+  display: none;
+}
+
+.textOnly .content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.textOnly h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: calc(var(--page-width) - 4rem);
+  margin: 0 auto;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+}
+
+@media (width <= 900px) {
+  .card,
+  .textOnly .content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  
-  .container {
-    max-width: 1100px;
-    margin-inline: auto;
-    position: relative;
-  }
-  
-  .headingPrimary {
-    font-family: "Bebas Neue", "Oswald", sans-serif;
-    font-size: clamp(2.8rem, 6vw, 3.8rem);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    text-align: center;
-    color: var(--accent);
-    margin-bottom: 3rem;
-  }
-  
-  /* CENTRAL LINE */
-  .container::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 100%;
-    background: var(--accent);
-    opacity: 0.9;
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-  /* ENTRY WRAPPER */
-  .entry {
-    position: relative;
-    display: flex;
-    gap: 2.2rem;
-    margin-block: 2.8rem;
-    align-items: flex-start;
-  }
-  
-  .left {
-    flex-direction: row-reverse;
-  }
-  
-  /* BULLET */
-  .entry::before {
-    content: attr(data-year);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--accent);
-    font-weight: 700;
-    color: var(--bg-dark);
-    z-index: 2;
-    box-shadow: 0 0 0 6px rgb(224 108 52 / 20%);
-    pointer-events: none;
-  }
-  
-  /* CARD */
-  .card {
-    background: var(--card-bg);
-    border-radius: var(--card-radius);
-    padding: 1.5rem 1.75rem;
-    width: clamp(280px, 46%, 480px);
-    box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
-    backdrop-filter: blur(6px);
-    transition: transform 0.25s ease;
-  }
-  .card:hover {
-    transform: translateY(-6px) scale(1.02);
-  }
-  
-  .cardTitle {
-    margin: 0 0 0.35rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text-color);
-  }
-  
-  .cardTag {
-    background: rgba(224, 108, 52, 0.15);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    margin-bottom: 0.75rem;
-  }
-  
+
   .media {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    display: block;
-    margin-block: 1rem;
+    max-height: 450px;
   }
-  
-  .actions {
-    display: flex;
-    gap: 0.45rem;
-    margin-top: 0.75rem;
+}
+
+@media (width <= 600px) {
+  .header {
+    min-height: 60svh;
+    padding: 7rem 1.25rem 3rem;
   }
-  
-  .iconBtn {
-    transition: transform 0.18s ease, background 0.18s ease;
+
+  .list {
+    padding-inline: 1.25rem;
+    gap: 3rem;
   }
-  .iconBtn:hover {
-    transform: translateY(-3px);
-    background: rgba(224, 108, 52, 0.15);
+
+  .footer {
+    margin-inline: 1.25rem;
   }
-  
-  /* MOBILE STACK */
-  @media (max-width: 768px) {
-    .container::before {
-      left: 8px;
-      transform: none;
-      pointer-events: none;
-    }
-    .entry,
-    .left {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .entry::before {
-      left: 8px;
-      transform: translate(-50%, -50%);
-    }
-    .card {
-      width: 100%;
-    }
+
+  .footer a {
+    font-size: 0.7rem;
   }
-  
+}

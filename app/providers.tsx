@@ -1,94 +1,42 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-  ReactNode,
-} from "react";
-import { MantineProvider } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-import { theme as mantineThemeConfig } from "../theme";
+import type { ReactNode } from "react";
+import { MantineProvider, localStorageColorSchemeManager } from "@mantine/core";
+import { SiteMotionProvider } from "../components/ScrollScene/ScrollScene";
+import { theme } from "../theme";
+import I18nClientProvider from "../components/I18nClientProvider";
 
-// Define the shape of the theme context
-interface ThemeContextType {
-  theme: "theme-dark" | "theme-light";
-  toggleTheme: () => void;
-  setThemeMode: (mode: "theme-dark" | "theme-light") => void;
-}
-
-// Create the context with a default undefined value
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-// Custom hook to use the theme context
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+const colorSchemeManager = localStorageColorSchemeManager({
+  key: "mantine-color-scheme-value",
+});
+const getStoredScheme = colorSchemeManager.get;
+colorSchemeManager.get = (defaultValue) => {
+  try {
+    // Preserve preferences saved by the previous version of the website.
+    if (
+      typeof window !== "undefined" &&
+      !localStorage.getItem("mantine-color-scheme-value")
+    ) {
+      const legacy = localStorage.getItem("runevolve-theme");
+      if (legacy === "theme-light") return "light";
+      if (legacy === "theme-dark") return "dark";
+    }
+  } catch {
+    // Browsers may disable storage; the theme still works for this visit.
   }
-  return context;
-}
+  return getStoredScheme(defaultValue);
+};
 
-// ThemeProvider component
 export default function Providers({ children }: { children: ReactNode }) {
-  const [colorScheme, setColorScheme] = useState<"dark" | "light">(() => {
-    if (typeof window !== "undefined") {
-      const storedTheme = localStorage.getItem("runevolve-theme");
-      if (storedTheme === "theme-light" || storedTheme === "theme-dark") {
-        return storedTheme === "theme-dark" ? "dark" : "light";
-      }
-      return document.body.classList.contains("theme-light") ? "light" : "dark";
-    }
-    return "dark"; // Default for SSR
-  });
-
-  const theme = colorScheme === "dark" ? "theme-dark" : "theme-light";
-
-  useEffect(() => {
-    document.body.classList.remove("theme-dark", "theme-light", "dark");
-    document.body.classList.add(theme);
-    if (colorScheme === "dark") {
-      document.body.classList.add("dark");
-    }
-    if (typeof window !== "undefined") {
-      localStorage.setItem("runevolve-theme", theme);
-    }
-  }, [colorScheme, theme]);
-
-  // Global listener for React hydration errors
-  useEffect(() => {
-    const handleError = (e: ErrorEvent) => {
-      if (e.message && e.message.toLowerCase().includes("hydration")) {
-        notifications.show({
-          title: "Hydration Error",
-          message:
-            "There was a problem loading this page. Refresh to continue.",
-          color: "red",
-        });
-      }
-    };
-
-    window.addEventListener("error", handleError);
-    return () => window.removeEventListener("error", handleError);
-  }, []);
-
-  const toggleTheme = () => {
-    setColorScheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
-
-  const setThemeMode = (mode: "theme-dark" | "theme-light") => {
-    setColorScheme(mode === "theme-dark" ? "dark" : "light");
-  };
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setThemeMode }}>
+    <I18nClientProvider>
       <MantineProvider
-        forceColorScheme={colorScheme}
-        theme={mantineThemeConfig}
+        defaultColorScheme="dark"
+        colorSchemeManager={colorSchemeManager}
+        theme={theme}
       >
-        {children}
+        <SiteMotionProvider>{children}</SiteMotionProvider>
       </MantineProvider>
-    </ThemeContext.Provider>
+    </I18nClientProvider>
   );
 }

@@ -1,8 +1,9 @@
-// components/ProjectsTimeline/ProjectsTimeline.tsx
 "use client";
-import { Badge, Group, Paper, Text, ActionIcon } from "@mantine/core";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  IconWorld,
+  IconArrowUpRight,
+  IconArrowLeft,
   IconBrandGithub,
   IconBrandLinkedin,
   IconChevronDown,
@@ -10,12 +11,14 @@ import {
 } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Reveal from "../../components/Reveal/Reveal";
 import classes from "./projects.module.css";
 
 export interface Project {
   key: string;
   year: number;
   video?: string;
+  image?: string;
   website?: string;
   github?: string;
   linkedin?: string;
@@ -23,9 +26,14 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    key: "foqus",
+    year: 2025,
+    website: "https://foqus-vision.com",
+  },
+  {
     key: "growbot",
     year: 2025,
-    video: "./Frontpage_1.jpeg",
+    image: "/Frontpage_1.jpeg",
     linkedin:
       "https://www.linkedin.com/posts/koen-van-wijlick-00b820204_mijn-afstudeerproject-is-volop-in-beweging-activity-7310028509232398338-o1BD?utm_source=share&utm_medium=member_desktop&rcm=ACoAADQXQgsBiuWXsp4QkyzdZNYd_BqJiNwB3f4",
   },
@@ -35,11 +43,6 @@ const projects: Project[] = [
     website: "https://koenvanwijlick.com",
     github: "https://github.com/Pecako2001/curriculum_vitae",
     linkedin: "https://www.linkedin.com/in/koen-van-wijlick-00b820204",
-  },
-  {
-    key: "runEvolve",
-    year: 2025,
-    github: "https://github.com/Pecako2001/RunEvolve",
   },
   {
     key: "greenhouseAutomation",
@@ -62,113 +65,158 @@ const sorted = [...projects].sort((a, b) => b.year - a.year);
 export default function ProjectsPage() {
   const { t } = useTranslation();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-
-  function toggle(key: string) {
-    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
-  }
   return (
     <section id="projects" className={classes.wrapper}>
-      <div className={classes.container}>
-        <h1 className={classes.headingPrimary}>{t("projects.heading")}</h1>
-
-        {sorted.map((project, idx) => {
-          const side = idx % 2 === 0 ? classes.right : classes.left;
-          return (
+      <header className={classes.header}>
+        <Image
+          src="/Frontpage_1.jpeg"
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          className={classes.cover}
+        />
+        <div className={classes.shade} />
+        <div className={classes.headerContent}>
+          <h1 className={classes.heading}>{t("projects.heading")}</h1>
+          <p className={classes.subtitle}>{t("design.projectsDescription")}</p>
+        </div>
+      </header>
+      <div className={classes.list}>
+        {sorted.map((project) => (
+          <article
+            key={project.key}
+            className={classes.project}
+            data-year={project.year}
+          >
+            <div className={classes.meta}>
+              <span>{project.year}</span>
+            </div>
             <div
-              key={project.key}
-              className={`${classes.entry} ${side}`}
-              data-year={project.year}
+              className={`${classes.card} ${!project.image && !project.video ? classes.textOnly : ""}`}
             >
-              <Paper withBorder={false} shadow="md" className={classes.card}>
-                <h3 className={classes.cardTitle}>
-                  {t(`projects.items.${project.key}.title`)}
-                </h3>
-                <Badge className={classes.cardTag} size="md">
-                  {t(`projects.items.${project.key}.tag`)}
-                </Badge>
-
-                {project.video &&
-                  (project.video.match(/\.(jpeg|jpg|png|gif|webp)$/i) ? (
-                    <img
-                      src={project.video}
-                      alt={t(`projects.items.${project.key}.title`)}
-                      className={classes.media}
-                    />
-                  ) : (
-                    <video controls className={classes.media}>
-                      <source src={project.video} type="video/mp4" />
-                      <track kind="captions" />
-                    </video>
-                  ))}
-
-                <Text lineClamp={expanded[project.key] ? undefined : 3}>
-                  {t(`projects.items.${project.key}.description`)}
-                </Text>
-                <ActionIcon
-                  className={classes.iconBtn}
-                  onClick={() => toggle(project.key)}
-                  variant="subtle"
-                  aria-label={expanded[project.key] ? "Collapse" : "Expand"}
-                  size="lg"
-                >
-                  {expanded[project.key] ? (
-                    <IconChevronUp size={24} />
-                  ) : (
-                    <IconChevronDown size={24} />
+              <div className={classes.visual}>
+                {project.image && (
+                  <Image
+                    src={project.image}
+                    alt={t(`projects.items.${project.key}.title`)}
+                    width={1435}
+                    height={1078}
+                    sizes="(max-width: 900px) 100vw, 600px"
+                    className={classes.media}
+                  />
+                )}
+                {project.video && (
+                  <video
+                    controls
+                    preload="none"
+                    playsInline
+                    className={classes.media}
+                    aria-label={t(`projects.items.${project.key}.title`)}
+                  >
+                    <source src={project.video} type="video/mp4" />
+                  </video>
+                )}
+              </div>
+              <Reveal className={classes.content}>
+                <div className={classes.projectTitle}>
+                  {project.key === "foqus" && (
+                    <p className={classes.current}>
+                      {t("design.projectCurrent")}
+                    </p>
                   )}
-                </ActionIcon>
-
-                {(project.website || project.github || project.linkedin) && (
-                  <Group className={classes.actions} gap="xs">
+                  <span className={classes.tag}>
+                    {t(`projects.items.${project.key}.tag`)}
+                  </span>
+                  <h2>{t(`projects.items.${project.key}.title`)}</h2>
+                </div>
+                <div className={classes.details}>
+                  <p
+                    id={`description-${project.key}`}
+                    className={
+                      expanded[project.key]
+                        ? classes.description
+                        : `${classes.description} ${classes.clamped}`
+                    }
+                  >
+                    {t(`projects.items.${project.key}.description`)}
+                  </p>
+                  <button
+                    type="button"
+                    className={classes.expand}
+                    onClick={() =>
+                      setExpanded((prev) => ({
+                        ...prev,
+                        [project.key]: !prev[project.key],
+                      }))
+                    }
+                    aria-label={t(
+                      expanded[project.key]
+                        ? "projects.collapse"
+                        : "projects.expand",
+                    )}
+                    aria-expanded={!!expanded[project.key]}
+                    aria-controls={`description-${project.key}`}
+                  >
+                    {t(
+                      expanded[project.key]
+                        ? "projects.collapse"
+                        : "projects.expand",
+                    )}
+                    {expanded[project.key] ? (
+                      <IconChevronUp size={17} />
+                    ) : (
+                      <IconChevronDown size={17} />
+                    )}
+                  </button>
+                  <div className={classes.actions}>
                     {project.website && (
-                      <ActionIcon
-                        className={classes.iconBtn}
-                        component="a"
+                      <a
                         href={project.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Website"
-                        size="lg"
-                        variant="subtle"
                       >
-                        <IconWorld size={24} />
-                      </ActionIcon>
+                        {t("design.viewWebsite")}
+                        <IconArrowUpRight size={18} />
+                      </a>
                     )}
                     {project.github && (
-                      <ActionIcon
-                        className={classes.iconBtn}
-                        component="a"
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="GitHub"
-                        size="lg"
-                        variant="subtle"
                       >
-                        <IconBrandGithub size={24} />
-                      </ActionIcon>
+                        <IconBrandGithub size={18} />
+                        GitHub
+                      </a>
                     )}
                     {project.linkedin && (
-                      <ActionIcon
-                        className={classes.iconBtn}
-                        component="a"
+                      <a
                         href={project.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="LinkedIn"
-                        size="lg"
-                        variant="subtle"
                       >
-                        <IconBrandLinkedin size={24} />
-                      </ActionIcon>
+                        <IconBrandLinkedin size={18} />
+                        LinkedIn
+                      </a>
                     )}
-                  </Group>
-                )}
-              </Paper>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          );
-        })}
+          </article>
+        ))}
       </div>
+      <footer className={classes.footer}>
+        <Link href="/" className="secondaryLink">
+          <IconArrowLeft size={18} />
+          {t("design.backHome")}
+        </Link>
+        <Link href="/#contact" className="primaryLink">
+          {t("contact.heading")}
+          <IconArrowUpRight size={18} />
+        </Link>
+      </footer>
     </section>
   );
 }

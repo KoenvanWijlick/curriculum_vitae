@@ -1,0 +1,22 @@
+.reveal {
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.65, 0.3, 1),
+    filter 0.8s ease;
+}
+
+.reveal[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

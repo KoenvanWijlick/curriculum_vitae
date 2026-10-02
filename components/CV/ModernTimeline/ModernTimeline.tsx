@@ -1,183 +1,103 @@
-// components/ModernTimeline/ModernTimeline.tsx
 "use client";
-import React, { useMemo, useRef } from "react";
-import { Title, Text, Paper, Stack } from "@mantine/core";
-import { motion, useInView } from "framer-motion";
+
+import { IconArrowUpRight } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import Reveal from "../../Reveal/Reveal";
 import classes from "./ModernTimeline.module.css";
 
-interface Entry {
-  id: string;
-  label: string;
-  sub?: string;
-  info?: string;
-  type?: "category";
-}
-
-const bgArr = ["/background1.png"];
+const groups = [
+  { key: "work", entries: ["foqus", "work1", "work2", "work3", "work5"] },
+  { key: "education", entries: ["school1", "school2", "school3"] },
+  {
+    key: "internships",
+    entries: ["internship1", "internship2", "internship3"],
+  },
+  { key: "volunteer", entries: ["volunteerBoard", "work4"] },
+];
 
 export default function ModernTimeline() {
   const { t } = useTranslation();
-  const bg = useMemo(() => bgArr[Math.floor(Math.random() * bgArr.length)], []);
-
-  const sections: Entry[] = useMemo(
-    () => [
-      {
-        id: "cat-edu",
-        label: t("categories.education", "Education"),
-        type: "category",
-      },
-      {
-        id: "school1",
-        label: t("career.school1.label"),
-        sub: t("career.school1.sub"),
-        info: t("career.school1.info"),
-      },
-      {
-        id: "school2",
-        label: t("career.school2.label"),
-        sub: t("career.school2.sub"),
-        info: t("career.school2.info"),
-      },
-      {
-        id: "school3",
-        label: t("career.school3.label"),
-        sub: t("career.school3.sub"),
-        info: t("career.school3.info"),
-      },
-      {
-        id: "cat-intern",
-        label: t("categories.internships", "Internships"),
-        type: "category",
-      },
-      {
-        id: "internship1",
-        label: t("career.internship1.label"),
-        sub: t("career.internship1.sub"),
-        info: t("career.internship1.info"),
-      },
-      {
-        id: "internship2",
-        label: t("career.internship2.label"),
-        sub: t("career.internship2.sub"),
-        info: t("career.internship2.info"),
-      },
-      {
-        id: "internship3",
-        label: t("career.internship3.label"),
-        sub: t("career.internship3.sub"),
-        info: t("career.internship3.info"),
-      },
-      {
-        id: "cat-work",
-        label: t("categories.work", "Work Experience"),
-        type: "category",
-      },
-      {
-        id: "work1",
-        label: t("career.work1.label"),
-        sub: t("career.work1.sub"),
-        info: t("career.work1.info"),
-      },
-      {
-        id: "work2",
-        label: t("career.work2.label"),
-        sub: t("career.work2.sub"),
-        info: t("career.work2.info"),
-      },
-      {
-        id: "work3",
-        label: t("career.work3.label"),
-        sub: t("career.work3.sub"),
-        info: t("career.work3.info"),
-      },
-      {
-        id: "work5",
-        label: t("career.work5.label"),
-        sub: t("career.work5.sub"),
-        info: t("career.work5.info"),
-      },
-      {
-        id: "cat-vol",
-        label: t("categories.volunteer", "Volunteer Work"),
-        type: "category",
-      },
-      {
-        id: "work4",
-        label: t("career.work4.label"),
-        sub: t("career.work4.sub"),
-        info: t("career.work4.info"),
-      },
-      {
-        id: "cat-more",
-        label: t("categories.more", "And many more to come"),
-        type: "category",
-      },
-    ],
-    [t],
-  );
-
   return (
     <section id="career" className={classes.wrapper}>
-      <div className={classes.bg} style={{ backgroundImage: `url(${bg})` }} />
-      <div className={classes.inner}>
-        {/* using Stack keeps vertical rhythm on mobile */}
-        <Stack gap="xl">
-          {sections.map((entry, idx) => (
-            <TimelineEntry key={entry.id} entry={entry} index={idx} />
+      <div className={classes.layout}>
+        <div className={classes.lead}>
+          <h2 className="sectionTitle">{t("design.careerHeadline")}</h2>
+          <div className={classes.index}>
+            {groups.map((group) => (
+              <a key={group.key} href={`#career-${group.key}`}>
+                {t(`categories.${group.key}`)}
+                <IconArrowUpRight size={14} />
+              </a>
+            ))}
+          </div>
+          <a
+            className={classes.download}
+            href="/Koen_van_Wijlick_CV_EN.pdf"
+            download
+          >
+            {t("intro.downloadCV")}
+            <IconArrowUpRight size={15} />
+          </a>
+        </div>
+        <div className={classes.timeline}>
+          {groups.map((group) => (
+            <section
+              id={`career-${group.key}`}
+              className={classes.group}
+              key={group.key}
+            >
+              <Reveal className={classes.groupHeading}>
+                <h2>{t(`categories.${group.key}`)}</h2>
+              </Reveal>
+              <div className={classes.entries}>
+                {group.entries.map((key) => {
+                  const current = key === "foqus";
+                  const [role, ...description] = t(`career.${key}.info`).split(
+                    "\n",
+                  );
+                  const date = t(`career.${key}.sub`, { defaultValue: "" });
+                  return (
+                    <article
+                      key={key}
+                      className={`${classes.entry} ${current ? classes.currentEntry : ""}`}
+                    >
+                      {current && (
+                        <p className={classes.currentBadge}>
+                          <span />
+                          {t("design.currentRole")}
+                        </p>
+                      )}
+                      <Reveal>
+                        <div className={classes.entryHeading}>
+                          <h3>{t(`career.${key}.label`)}</h3>
+                          {date && <p className={classes.date}>{date}</p>}
+                        </div>
+                        <p className={classes.role}>{role}</p>
+                        {description.map((paragraph, index) => (
+                          <p className={classes.description} key={index}>
+                            {paragraph}
+                          </p>
+                        ))}
+                        {current && (
+                          <a
+                            className={classes.website}
+                            href="https://foqus-vision.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            foqus-vision.com
+                            <IconArrowUpRight size={15} />
+                          </a>
+                        )}
+                      </Reveal>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
           ))}
-        </Stack>
+        </div>
       </div>
     </section>
-  );
-}
-
-function TimelineEntry({ entry, index }: { entry: Entry; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
-
-  /* category headings */
-  if (entry.type === "category") {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 40 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.45 }}
-      >
-        <Title order={2} className={classes.category} id={entry.id}>
-          {entry.label}
-        </Title>
-      </motion.div>
-    );
-  }
-
-  /* timeline card */
-  const sideClass = index % 2 === 0 ? classes.right : classes.left; // alternate
-
-  return (
-    <motion.div
-      ref={ref}
-      className={`${classes.entry} ${sideClass}`}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.45 }}
-    >
-      <Paper withBorder={false} shadow="lg" className={classes.card}>
-        <Title order={3} className={classes.title}>
-          {entry.label}
-        </Title>
-        {entry.sub && <Text className={classes.subtitle}>{entry.sub}</Text>}
-        {entry.info &&
-          entry.info.split("\n").map((line, i) => (
-            <Text
-              key={i}
-              className={i === 0 ? classes.role : classes.description}
-            >
-              {line}
-            </Text>
-          ))}
-      </Paper>
-    </motion.div>
   );
 }

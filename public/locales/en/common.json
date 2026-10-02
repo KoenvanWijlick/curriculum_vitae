@@ -1,8 +1,8 @@
 {
   "intro": {
     "greeting": "Hi, I’m",
-    "subtitle": "Mechatronics graduate & AI engineer building autonomous greenhouse robots.",
-    "viewJourney": "View my journey",
+    "subtitle": "AI Software Engineer at FOQUS Vision, developing software and integrations for intelligent visual quality control.",
+    "viewJourney": "View my CV",
     "downloadCV": "Download CV",
     "takeRoad": "Discover the path I walk",
     "viewProjects": "Projects"
@@ -43,7 +43,7 @@
     "work3": {
       "label": "Restaurant Op d’n Berg, Helden",
       "sub": "March 2017 to August 2022",
-      "info": "Service staff, snackbar and kitchen\nWorked closely with colleagues and was expected to take a leading role in managing staff and ensuring smooth operations across service and kitchen areas."
+      "info": "Service staff, snackbar and kitchen\nI worked closely with colleagues and helped coordinate the team when needed."
     },
     "work4": {
       "label": "Stichting Jong Nederland Helden",
@@ -55,7 +55,6 @@
       "sub": "February 2014 until November 2020",
       "info": "Several jobs \nWorked in strawberry, asparagus, and leek farms in roles such as cultivation assistant and quality controller. Responsible for harvesting, sorting, and inspecting crops."
     },
-
     "internship1": {
       "label": "Mechatronic Machinery, Deurne",
       "sub": "August 2023 to January 2024",
@@ -70,11 +69,22 @@
       "label": "Various Companies (Christiaens Group BV, WP Haton, Aliaxis)",
       "sub": "May 2018 to March 2019",
       "info": "Internship (MBO level 4, year 3,2,1)\nGained broad experience in mechatronics through multiple internships. Tasks: drawing 2D electrical schematics, Excel calculations for mechanical components, assembling control cabinets, and cross-department collaboration for a solid foundation in industrial automation and design."
+    },
+    "foqus": {
+      "label": "FOQUS Vision, Deurne",
+      "info": "AI Software Engineer\nDesigning AI software and integrations for industrial visual quality control.",
+      "sub": "2025 – present"
+    },
+    "volunteerBoard": {
+      "label": "Stichting Jong Nederland Helden",
+      "sub": "May 2026 – present",
+      "info": "Board Member"
     }
   },
   "about": {
-    "heading": "Who I Am",
-    "paragraph": "I’m Koen van Wijlick — a mechatronics engineer delving into artificial intelligence. I am driven to make technology smarter, more sustainable, and more human-centered. From an early age, I’m fascinated by how mechatronic systems come to life when guided by intelligent software. This curiosity leads me to study Mechatronics, where I focus on robotics, computer vision, and autonomous systems. I thrive at the intersection of hardware and software — integrating smart electrical components, building intelligent control systems, and extracting valuable insights from camera feeds using machine learning. My approach revolves around clear communication, collaboration, and fast, thoughtful iteration. Whether I’m optimizing embedded systems or sketching new interface ideas, I strive to develop solutions that are not only technically robust but also benefit people and the planet. Do you share the same passion for technology that truly makes a difference?"
+    "heading": "About me",
+    "paragraph": "I studied Mechatronics at Fontys in Venlo, after completing an MBO in Mechatronics. I enjoy working on problems that involve both software and physical machines: camera systems, robot control, and industrial automation.\nOutside work, I enjoy running.",
+    "photoAlt": "Portrait of Koen van Wijlick"
   },
   "navbar": {
     "home": "Home",
@@ -83,28 +93,38 @@
     "brandFull": "Curriculum Vitae",
     "brandShort": "CV",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "primary": "Primary navigation",
+    "skipToContent": "Skip to content",
+    "toggleTheme": "Toggle theme",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "menu": "Navigation",
+    "about": "About",
+    "skills": "Skills"
   },
   "contact": {
-    "heading": "Let’s Talk",
+    "heading": "Contact",
     "name": "Name",
     "email": "Email",
     "reason": "Reason for contact",
     "preferredDate": "Preferred date",
     "submit": "Submit",
-    "thanks": "Thanks! I’ll be in touch soon."
+    "thanks": "Thanks! I’ll be in touch soon.",
+    "emailLabel": "Email:",
+    "sendMail": "Send email"
   },
   "software": {
-    "heading": "Software Experience & Certifications",
+    "heading": "Skills & certifications",
     "certHeading": "Certifi­cations",
     "skillsHeading": "Software & Programming Skills",
     "cert1": "SolidWorks Mechanical Design Associate – Issued: May 2019 – No expiration. Credential ID: C-5SUCTJW3L4. Validated proficiency in 3D CAD modeling, assembly creation and drawings using SolidWorks.",
     "cert2": "Basisveiligheid VCA – Issued: March 2018 – Expires: March 2028. Credential ID: 541448.05174689. Certified in occupational health & safety for high‑risk environments (Dutch/Belgian VCA standards).",
-    "skill1": "Python, C++ – Robotics, AI, computer vision (YOLO, ROS 2, OpenCV)",
-    "skill2": "React, TypeScript, JavaScript – Modern frontend development",
-    "skill3": "PostgreSQL, SQLite – Database design & integration",
+    "skill1": "Python, C++ – Robotics, AI, computer vision (YOLO, ROS 2, OpenCV, TensorFlow)",
+    "skill2": "React, TypeScript, JavaScript, Tailwind – Modern frontend development",
+    "skill3": "PostgreSQL, SQLite, Supabase – Database design & integration",
     "skill4": "FastAPI, MQTT – Backend APIs & real‑time comms",
-    "skill5": "Docker, Git, Linux – Containerisation, version control & ops",
+    "skill5": "Docker, Git, GitHub Actions, Linux – Containerisation, version control & ops",
     "skill6": "Siemens PLC (TIA Portal) – Industrial automation & control",
     "skill7": "SolidWorks, Inventor, AutoCAD – 3D modelling & 2D schematics",
     "skill8": "Redis, WebSockets – In‑memory data storage & live streaming",
@@ -124,13 +144,8 @@
     "items": {
       "cvsite": {
         "title": "Curriculum Vitae Website",
-        "description": "The CV website is an interactive and responsive portfolio built using Next.js and the Mantine UI library, designed to showcase my professional experience, projects, and skills in a modern and user-friendly format. It features dynamic sections for education, work history, technical skills, and personal projects, all presented with smooth animations and clean design. The site includes downloadable documents, live project links, and a contact form, making it both informative and engaging. With a focus on performance and accessibility, this project also serves as a practical demonstration of my frontend development abilities and attention to user experience.",
+        "description": "My personal CV website, built with Next.js, React, and Mantine. I use it to share my work experience and projects. It supports English and Dutch, light and dark themes, and a downloadable CV.",
         "tag": "Web Project"
-      },
-      "runEvolve": {
-        "title": "Run Evolve Application",
-        "description": "One of my passions is running. My interest in artificial intelligence inspired me to create a personal running companion—an application that analyzes my performance to provide insights and predict my best times. It also generates personalized training plans tailored to my abilities and progress. I use this project as a testing ground for newly released AI models and neural networks, allowing me to explore the latest advancements in a practical and meaningful way.",
-        "tag": "In Progress"
       },
       "growbot": {
         "title": "Growbot",
@@ -146,7 +161,63 @@
         "title": "AI Detection",
         "description": "During my internship at Mechatronic Machinery, I developed an AI-powered platform for object detection and localization, earning a final grade of 9.0. The system enables robots to identify and accurately locate objects for automated picking tasks, opening new possibilities in smart industrial automation. The platform allows users to easily train and deploy AI networks, making advanced machine vision more accessible.",
         "tag": "Traineeship"
+      },
+      "foqus": {
+        "title": "FOQUS",
+        "tag": "AI Vision Platform",
+        "description": "FOQUS combines self-learning AI and computer vision for quality control in food and manufacturing industries. The platform connects QUBE for quality inspection and AI model training with OptIQ for inline inspection. As an AI Software Engineer, I work on AI software and integrations. The FOQUS website presents the solutions, team, and applications for manufacturers."
       }
-    }
+    },
+    "expand": "Show more",
+    "collapse": "Show less"
+  },
+  "design": {
+    "discipline": "Mechatronics · AI · Robotics",
+    "location": "Based in the Netherlands",
+    "heroStatement": "I’m a mechatronics engineer from Panningen. At FOQUS Vision, I develop AI software and integrations for visual quality inspection.",
+    "currently": "AI Software Engineer at",
+    "heroNote": "ENGINEER. BUILDER. EXPLORER.",
+    "scrollExplore": "Work experience",
+    "currentFocus": "Current work",
+    "currentRole": "Current role",
+    "foqusHeadline": "Teaching machines\nto see the difference.",
+    "foqusDescription": "I develop AI software and integrations for visual quality inspection at FOQUS Vision.",
+    "myRole": "My role at FOQUS",
+    "exploreFoqus": "Explore FOQUS",
+    "moreProjects": "More projects",
+    "focus": {
+      "vision": "Computer vision",
+      "software": "AI software",
+      "integration": "Industrial integration"
+    },
+    "aboutHeadline": "About me",
+    "outdoorPhotoAlt": "Koen exploring a mountain landscape",
+    "beyondCode": "Outside work",
+    "aboutLead": "",
+    "journey": "CV",
+    "careerHeadline": "Experience & education",
+    "careerDescription": "",
+    "nextChapter": "The next chapter is still being written.",
+    "toolkit": "The toolkit",
+    "skillsHeadline": "Technical skills",
+    "skillsDescription": "From the first sketch to a working system. A hands-on toolkit for building across disciplines.",
+    "credentials": "Experience & credentials",
+    "contactHeadline": "Contact",
+    "contactDescription": "You can reach me by email or on LinkedIn.",
+    "backToTop": "Back to top",
+    "pauseMotion": "Pause animations",
+    "resumeMotion": "Resume animations",
+    "motion": "Motion",
+    "projectsLabel": "Projects",
+    "projectsDescription": "Projects from my work, studies, and personal interests.",
+    "projectCurrent": "Current work at FOQUS Vision",
+    "viewWebsite": "Visit website",
+    "projectIndex": "Project",
+    "projectDetails": "Project details",
+    "foqusVisual": "SELF-LEARNING VISION",
+    "cvVisual": "DESIGN × DEVELOPMENT",
+    "backHome": "Back to home",
+    "heroRole": "Mechatronics engineer · AI Software Engineer at FOQUS Vision",
+    "heroPhotoAlt": "Growbot graduation project in a greenhouse"
   }
 }
